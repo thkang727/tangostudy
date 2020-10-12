@@ -1,0 +1,4 @@
+STL queue 를 사용하여 풀이하였다.
+
+STL queue의 함수들이 있어, 사용하였다.
+if/else-if 문에 따라 command 에 따른 명령을 수행하였다.
