@@ -1,77 +1,48 @@
 
-// 명령 N (1~10000) 입력 받기.
-
+/*
+    baek 10799 - 쇠막대기
+*/
+// () = 레이저.
+    // (  ) = 쇠막대기.
 
 #include <iostream>
-#include <stack>
-#include <string>
-//STL 라이브러리 stack 사용.
 
-#define MAX_Command_SIZE 10000
-// MAX size 지정.
 
 using namespace std;
 
-
 int main()
 {
-    int command;
 
 
-    //cout << "Input command number\n";
-    cin >> command;
 
-    stack<int> stack_Int;
-    //stack 클래스 선언.
+    int num = 0; // 나눠진 쇠막대기 수,
+    int stack_stick=0;
 
-    string do_Command;
+    char stick[100000] ;
 
-   // cout << "Input do_command\n";
+    cin >> stick ;
 
-    if(command <= MAX_Command_SIZE && command > 0)
-    // 1<= command's num <= 10000
+    for(int i = 0; stick[i]!=NULL; i++)
     {
-        for(int index=0; index < command; index++){
-            cin >> do_Command;
+        if(stick[i] == '('){
 
-            if(do_Command == "push")
-            {
-                int num;
-                cin >> num;
-                stack_Int.push(num);
-
+            if(stick[i+1] == ')'){      // () : 레이저 인 경우.
+                num = num + stack_stick;    // 잘려진 막대기의 수를 더함.
+                i++;                    // i+1 이 ) 였으므로.
+                stack_stick--;
+                //중복덧셈 방지 - 레이저는 막대기 수 증가 가 아니므로.
             }
+            stack_stick++;      // 막대기 +1
 
-            else if(do_Command == "pop"){
+        }
+        else{
 
-                if(!stack_Int.empty()){
-                    cout << stack_Int.top() << endl;
-                    stack_Int.pop();
-                } else {
-                    cout << "-1" << endl;
-                }
-            }
-            else if(do_Command == "size"){
-                cout << stack_Int.size() << endl;
-            }
-
-            else if(do_Command =="empty"){
-                if(stack_Int.empty()){
-                    cout << "1" << endl;
-                }
-                else{
-                    cout <<"0" << endl;
-                }
-
-            }
-            else if(do_Command=="top"){
-                if(!stack_Int.empty()){
-                    cout << stack_Int.top() << endl;
-                }
-                else
-                    cout << "-1" << endl;
-            }
+            if(stack_stick > 0)
+                stack_stick--;  // 잘려졌던 막대기 잔해.
+            num++;              // 를 더함.
         }
     }
+    num = num + stack_stick;    // 나머지 막대기 잔해들을 더함.
+    cout << num;
     return 0;
 }
