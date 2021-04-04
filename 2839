@@ -1,0 +1,37 @@
+// 2839번 스터디.
+
+//5키로, 3키로.
+//설탕배달.
+// 정확히 나눠져야함(안되면 -1 출력.)
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int sugar_killo, tmp, sugar_3kil, sugar_5kil;
+    cin >> sugar_killo;
+
+    if(sugar_killo >= 3 && sugar_killo <= 5000){
+
+        if(sugar_killo % 5 == 0) {// 5는 큰 수 므로(3보다) 바로 출력 가능.
+            cout << (sugar_killo/5) ;
+            return 0;
+        }
+        // 3은 안됨.
+        else {
+            for(int i = (sugar_killo/5); i >= 0; i--){
+                tmp = sugar_killo - (5*i);
+                if(tmp % 3 == 0){
+                    sugar_5kil = i;
+                    sugar_3kil = tmp/3;
+                    cout << (sugar_3kil + sugar_5kil);
+                    break;
+                }
+                if(i == 0){
+                    cout << -1;
+                }
+            }
+        }
+    }
+    return 0;
